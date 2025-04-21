@@ -1,0 +1,270 @@
+{
+  "info": {
+    "name": "Shipping Management API",
+    "_postman_id": "shipping-management-api",
+    "description": "Collection containing all API endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "ShipEngine Integration",
+      "item": [
+        {
+          "name": "Get Shipping Rates",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/api/shipping/rates",
+              "host": ["{{url}}"],
+              "path": ["api", "shipping", "rates"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": {
+                "carrierId": "se-161650",
+                "serviceCode": "usps_first_class_mail",
+                "shipDate": "2024-03-20T00:00:00Z",
+                "shipTo": {
+                  "name": "John Smith",
+                  "phone": "1234567890",
+                  "addressLine1": "123 Main Street",
+                  "cityLocality": "Austin",
+                  "stateProvince": "TX",
+                  "postalCode": "78701",
+                  "countryCode": "US",
+                  "addressResidentialIndicator": "yes"
+                },
+                "shipFrom": {
+                  "name": "Warehouse Center",
+                  "companyName": "ABC Logistics",
+                  "phone": "9876543210",
+                  "addressLine1": "456 Industrial Ave",
+                  "cityLocality": "Dallas",
+                  "stateProvince": "TX",
+                  "postalCode": "75001",
+                  "countryCode": "US",
+                  "addressResidentialIndicator": "no"
+                },
+                "packages": [
+                  {
+                    "packageCode": "package",
+                    "weight": {
+                      "value": 5.5,
+                      "unit": "pound"
+                    },
+                    "dimensions": {
+                      "unit": "inch",
+                      "length": 12,
+                      "width": 8,
+                      "height": 6
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        {
+          "name": "Track Package",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{url}}/api/shipping/track/SE123456789",
+              "host": ["{{url}}"],
+              "path": ["api", "shipping", "track", "SE123456789"]
+            }
+          }
+        },
+        {
+          "name": "Validate Address",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/api/shipping/validate-address",
+              "host": ["{{url}}"],
+              "path": ["api", "shipping", "validate-address"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": {
+                "name": "John Smith",
+                "addressLine1": "123 Main Street",
+                "cityLocality": "Austin",
+                "stateProvince": "TX",
+                "postalCode": "78701",
+                "countryCode": "US",
+                "addressResidentialIndicator": "yes"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Product Operations",
+      "item": [
+        {
+          "name": "Search Products",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{url}}/api/products/search?asin=laptop",
+              "host": ["{{url}}"],
+              "path": ["api", "products", "search"],
+              "query": [
+                {
+                  "key": "asin",
+                  "value": "B07ZPKBL9V"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Product Details",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{url}}/api/products/{productId}",
+              "host": ["{{url}}"],
+              "path": ["api", "products", "{productId}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Order Operations",
+      "item": [
+        {
+          "name": "Create Order",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/api/orders",
+              "host": ["{{url}}"],
+              "path": ["api", "orders"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": {
+                "productId": "12345",
+                "quantity": 1,
+                "shippingAddress": {
+                  "name": "John Smith",
+                  "addressLine1": "123 Main Street",
+                  "cityLocality": "Austin",
+                  "stateProvince": "TX",
+                  "postalCode": "78701",
+                  "countryCode": "US"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get Orders List",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{url}}/api/orders",
+              "host": ["{{url}}"],
+              "path": ["api", "orders"]
+            }
+          }
+        },
+        {
+          "name": "Get Order Details",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{url}}/api/orders/{orderId}",
+              "host": ["{{url}}"],
+              "path": ["api", "orders", "{orderId}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/api/auth/login",
+              "host": ["{{url}}"],
+              "path": ["api", "auth", "login"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": {
+                "username": "user@example.com",
+                "password": "password123"
+              }
+            }
+          }
+        },
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/api/auth/register",
+              "host": ["{{url}}"],
+              "path": ["api", "auth", "register"]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": {
+                "username": "newuser@example.com",
+                "password": "password123",
+                "name": "New User",
+                "email": "newuser@example.com"
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "url",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ]
+}

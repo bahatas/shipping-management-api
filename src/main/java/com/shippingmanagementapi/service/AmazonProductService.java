@@ -1,15 +1,27 @@
 package com.shippingmanagementapi.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.shippingmanagementapi.dto.*;
 import com.shippingmanagementapi.exception.ProductNotFoundException;
+import com.shippingmanagementapi.model.ApiRequestLog;
+import com.shippingmanagementapi.repository.ApiRequestLogRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.Before;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.Cache;
+import org.springframework.cache.CacheManager;
+
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -27,6 +39,17 @@ public class AmazonProductService {
 
     private final RestTemplate restTemplate;
 
+    @Autowired
+    private ApiRequestLogRepository apiRequestLogRepository;
+
+    @Autowired
+    private ObjectMapper objectMapper; // JSON dönüşümü için
+
+    @Cacheable(
+            value = "asinCache",
+            key = "#asin + '_' + #country",
+            unless = "#result == null"
+    )
     public AmazonProduct getProductDetails(String asin, String country) {
         log.info("Fetching product details for ASIN: {} and country: {}", asin, country);
 
@@ -62,13 +85,13 @@ public class AmazonProductService {
                 .price(extractPrice(data.getProductPrice()))
                 .currency(data.getCurrency())
                 .dimensions(productInfo.get("Product Dimensions"))
-                .weight(extractWeight(productInfo.get("Item Weight")))
+                .weight(extractWeight(null == productInfo.get("Item Weight") ? productInfo.get("Package Dimensions") :productInfo.get("Item Weight") ))
                 .weightUnit(extractWeightUnit(productInfo.get("Item Weight")))
                 .availability(data.getProductAvailability())
                 .isPrime(data.getIsPrime())
                 .manufacturer(productInfo.get("Manufacturer"))
                 .itemModelNumber(productInfo.get("Item model number"))
-                .packageDimensions(productInfo.get("Product Dimensions"))
+                .packageDimensions(productInfo.get("Package Dimensions"))
                 .build();
     }
 
@@ -83,7 +106,9 @@ public class AmazonProductService {
     }
 
     private Double extractWeight(String weightStr) {
-        if (weightStr == null) return null;
+        if (weightStr == null) {
+          return null;
+        }
         try {
             Pattern pattern = Pattern.compile("(\\d+(?:\\.\\d+)?)");
             Matcher matcher = pattern.matcher(weightStr);
@@ -104,7 +129,11 @@ public class AmazonProductService {
         return null;
     }
 
-    private RapidApiResponse fetchProductFromApi(String asin, String country) {
+
+    public RapidApiResponse fetchProductFromApi(String asin, String country) throws JsonProcessingException {
+
+        log.info("Cache MISS for ASIN: {} and country: {}. Making API request...", asin, country);
+
         HttpHeaders headers = new HttpHeaders();
         headers.set("x-rapidapi-key", apiKey);
         headers.set("x-rapidapi-host", apiHost);
@@ -122,8 +151,38 @@ public class AmazonProductService {
                 RapidApiResponse.class
         );
 
+        try {
+            ApiRequestLog apiresponse = new ApiRequestLog();
+            apiresponse.setAsin(asin);
+            apiresponse.setCountry(country);
+            apiresponse.setResponseData(objectMapper.writeValueAsString(response));
+            apiresponse.setRequestDate(LocalDateTime.now());
+            apiresponse.setFromCache(false);
+
+            // Calculate daily and monthly counters
+            Integer dailyCount = apiRequestLogRepository.countByAsinAndCountryAndRequestDateBetween(
+                    asin,
+                    country,
+                    LocalDateTime.now().withHour(0).withMinute(0).withSecond(0),
+                    LocalDateTime.now()
+            );
+            Integer totalCount = apiRequestLogRepository.countByAsinAndCountry(asin, country);
+
+            apiresponse.setDailyCounter(dailyCount + 1);
+            apiresponse.setTotalCounter(totalCount + 1);
+
+            ApiRequestLog save = apiRequestLogRepository.save(apiresponse);
+            log.info("Saved daata to db : {}",save.getAsin());
+
+
+        }catch (Exception e ){
+            log.error("Error on populating data for logger " + e.getMessage());
+        }
+
         return response.getBody();
+
     }
+
 
     private ProductDetails mapToProductDetails(Map<String, String> details) {
         if (details == null) return null;
