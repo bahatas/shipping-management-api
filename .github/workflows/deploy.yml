@@ -1,0 +1,55 @@
+name: Build and Deploy to Dokploy
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Build
+        uses: docker/setup-buildx-action@v3
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Read and bump version
+        id: bump_version
+        run: |
+          VERSION=$(cat version.txt)
+          echo "Current version: $VERSION"
+          IFS='.' read -r -a parts <<< "$VERSION"
+          PATCH=${parts[2]}
+          PATCH=$((PATCH + 1))
+          NEW_VERSION="${parts[0]}.${parts[1]}.$PATCH"
+          echo "New version: $NEW_VERSION"
+          echo $NEW_VERSION > version.txt
+          echo "VERSION=$NEW_VERSION" >> $GITHUB_ENV
+
+      - name: Build and Push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: yourdockerhubusername/yourappname:${{ env.VERSION }}
+
+      - name: Deploy via Dokploy
+        run: |
+          dokploy deploy --image yourdockerhubusername/yourappname:${{ env.VERSION }}
+
+      - name: Commit updated version.txt
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add version.txt
+          git commit -m "Bump version to ${{ env.VERSION }}"
+          git push
