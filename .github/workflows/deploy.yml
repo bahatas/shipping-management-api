@@ -42,6 +42,10 @@ jobs:
           push: true
           tags: bahadockerhub/shipping-management-api:${{ env.VERSION }}
 
+      - name: Install Dokploy CLI
+        run: |
+          curl -sSL https://get.dokploy.com | bash
+          echo "$HOME/.dokploy/bin" >> $GITHUB_PATH
 
       - name: Deploy via Dokploy
         run: |
