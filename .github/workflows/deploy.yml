@@ -41,7 +41,7 @@ jobs:
           context: .
           push: true
           tags: bahadockerhub/shipping-management-api:${{ env.VERSION }}
-                bahadockerhub/shipping-management-api:latest
+
 
       - name: Deploy via Dokploy
         run: |
