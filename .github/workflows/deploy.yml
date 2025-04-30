@@ -44,7 +44,7 @@ jobs:
 
       - name: Install Dokploy CLI
         run: |
-          curl -sSL https://get.dokploy.com | bash
+          npm install -g @dokploy/cli
           echo "$HOME/.dokploy/bin" >> $GITHUB_PATH
 
       - name: Dokploy Login
