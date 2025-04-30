@@ -47,6 +47,9 @@ jobs:
           curl -sSL https://get.dokploy.com | bash
           echo "$HOME/.dokploy/bin" >> $GITHUB_PATH
 
+      - name: Dokploy Login
+        run: dokploy login --token ${{ secrets.DOKPLOY_TOKEN }}
+
       - name: Deploy via Dokploy
         run: |
           dokploy deploy --image bahadockerhub/shipping-management-api:${{ env.VERSION }}
