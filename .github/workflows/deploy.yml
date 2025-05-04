@@ -57,6 +57,9 @@ jobs:
         run: |
           dokploy app:deploy --image bahadockerhub/shipping-management-api:${{ env.VERSION }}
 
+      - name: Trigger Dokploy Webhook
+        run: curl -X POST http://104.248.161.122:3000/api/deploy/RZiMvAkPPztxjpnLgh5F4
+
       - name: Commit updated version.txt
         run: |
           git config --global user.name 'github-actions[bot]'
