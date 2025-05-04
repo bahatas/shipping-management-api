@@ -44,18 +44,6 @@ jobs:
             bahadockerhub/shipping-management-api:${{ env.VERSION }}
             bahadockerhub/shipping-management-api:latest
 
-      - name: Install Dokploy CLI
-        run: |
-          npm install -g @dokploy/cli
-          echo "$HOME/.dokploy/bin" >> $GITHUB_PATH
-
-      - name: Dokploy Login
-        run: dokploy authenticate --url http://104.248.161.122:3000/ --token ${{ secrets.DOKPLOY_TOKEN }}
-
-
-      - name: Deploy via Dokploy
-        run: |
-          dokploy app:deploy --image bahadockerhub/shipping-management-api:${{ env.VERSION }}
 
       - name: Trigger Dokploy Webhook
         run: curl -X POST http://104.248.161.122:3000/api/deploy/RZiMvAkPPztxjpnLgh5F4
