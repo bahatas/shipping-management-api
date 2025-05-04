@@ -40,7 +40,9 @@ jobs:
         with:
           context: .
           push: true
-          tags: bahadockerhub/shipping-management-api:${{ env.VERSION }}
+          tags: |
+            bahadockerhub/shipping-management-api:${{ env.VERSION }}
+            bahadockerhub/shipping-management-api:latest
 
       - name: Install Dokploy CLI
         run: |
@@ -48,11 +50,12 @@ jobs:
           echo "$HOME/.dokploy/bin" >> $GITHUB_PATH
 
       - name: Dokploy Login
-        run: dokploy login --token ${{ secrets.DOKPLOY_TOKEN }}
+        run: dokploy authenticate --url http://104.248.161.122:3000/ --token ${{ secrets.DOKPLOY_TOKEN }}
+
 
       - name: Deploy via Dokploy
         run: |
-          dokploy deploy --image bahadockerhub/shipping-management-api:${{ env.VERSION }}
+          dokploy app:deploy --image bahadockerhub/shipping-management-api:${{ env.VERSION }}
 
       - name: Commit updated version.txt
         run: |
