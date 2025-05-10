@@ -24,8 +24,8 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<OrderDTO> createOrder(@RequestHeader("user-id") Long userId, @RequestBody CreateOrderRequest request) {
-        return ResponseEntity.ok(orderService.createOrder(userId, request));
+    public ResponseEntity<OrderDTO> createOrder(@RequestHeader("user-id") String email, @RequestBody CreateOrderRequest request) {
+        return ResponseEntity.ok(orderService.createOrder(email, request));
     }
 
     @GetMapping

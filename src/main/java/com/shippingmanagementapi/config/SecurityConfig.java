@@ -24,28 +24,27 @@ public class SecurityConfig {
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final AuthenticationProvider authenticationProvider;
 
-
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf()
-                .disable()
-                .cors()
-                .disable()
-                .authorizeHttpRequests()
-                .requestMatchers("/**") // Tüm endpointlere izin ver
-                .permitAll()
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-        return http.build();
-    }
+//
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        http
+//                .csrf(csrf -> csrf.disable())
+//                .cors()
+//                .disable()
+//                .authorizeHttpRequests(auth -> auth
+//                        // Swagger UI paths
+//                        .requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
+//                        // Your other security rules
+//                        .anyRequest().authenticated()
+//                );
+//
+//        return http.build();
+//    }
 // This needs to be required after development ended
-/*    @Bean
+   @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf()
-                .disable().cors() // CORS desteği eklendi
+                .disable().cors() // CORS
                 .disable().authorizeHttpRequests()
             .requestMatchers(
                 "/api/auth/login",    // login endpoint
@@ -64,7 +63,7 @@ public class SecurityConfig {
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
-    }*/
+    }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {

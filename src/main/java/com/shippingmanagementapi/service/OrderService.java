@@ -25,10 +25,10 @@ public class OrderService {
     }
 
     @Transactional
-    public OrderDTO createOrder(Long userId, CreateOrderRequest request) {
+    public OrderDTO createOrder(String userId, CreateOrderRequest request) {
 
         Orders order = new Orders();
-        order.setUser(userService.findById(userId).orElseThrow());
+        order.setUser(userService.findByEmail(userId));
         order.setOrderNumber(generateOrderNumber());
         order.setStoreName(request.getStoreName());
         order.setStatus("pending");
