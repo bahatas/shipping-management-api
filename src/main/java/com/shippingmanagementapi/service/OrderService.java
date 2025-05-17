@@ -28,7 +28,7 @@ public class OrderService {
     public OrderDTO createOrder(String userId, CreateOrderRequest request) {
 
         Orders order = new Orders();
-        order.setUser(userService.findByEmail(userId));
+        order.setUser(userService.findUserIdByEmail(userId));
         order.setOrderNumber(generateOrderNumber());
         order.setStoreName(request.getStoreName());
         order.setStatus("pending");
