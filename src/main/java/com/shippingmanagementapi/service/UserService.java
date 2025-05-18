@@ -34,7 +34,7 @@ public class UserService {
 
     }
 
-    public UserDTO findByEmail(String email) {
+    public UserDTO findByUsername(String email) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new NoSuchElementException("User does not exist with this email: " + email));
         log.info("User found : {}", user.getEmail());
