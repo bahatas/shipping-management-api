@@ -1,7 +1,6 @@
 package com.shippingmanagementapi.controller;
 
 import com.shippingmanagementapi.dto.UserDTO;
-import com.shippingmanagementapi.model.User;
 import com.shippingmanagementapi.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +29,7 @@ public class UserController {
     public ResponseEntity<UserDTO> getUserById(@PathVariable String email) {
         log.info("Get user by email request received for {}",email);
 
-        return Optional.of(userService.findByEmail(email))
+        return Optional.of(userService.findByUsername(email))
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }

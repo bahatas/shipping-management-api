@@ -1,5 +1,6 @@
 package com.shippingmanagementapi.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.shippingmanagementapi.dto.CreateOrderRequest;
 import com.shippingmanagementapi.dto.OrderDTO;
 import com.shippingmanagementapi.repository.OrderRepository;
@@ -17,6 +18,7 @@ public class OrderController {
     private final OrderRepository orderRepository;
     private final OrderService orderService;
 
+
     public OrderController(OrderService orderService,
                            OrderRepository orderRepository) {
         this.orderService = orderService;
@@ -24,13 +26,16 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<OrderDTO> createOrder(@RequestHeader("user-id") String email, @RequestBody CreateOrderRequest request) {
+    public ResponseEntity<OrderDTO> createOrder(@RequestHeader("username") String email, @RequestBody CreateOrderRequest request) throws JsonProcessingException {
         return ResponseEntity.ok(orderService.createOrder(email, request));
     }
 
     @GetMapping
-    public ResponseEntity<List<OrderDTO>> getUserOrders(@RequestHeader("user-id") Long userId) {
-        return ResponseEntity.ok(orderService.getUserOrders(userId));
+    public ResponseEntity<List<OrderDTO>> getUserOrders(@RequestHeader("username") String username) {
+        log.info("Received get order of users for user :{}", username);
+        List<OrderDTO> userOrders = orderService.getUserOrders(username);
+        log.info("Fetched total order : {}",userOrders.size());
+        return ResponseEntity.ok(orderService.getUserOrders(username));
     }
 
     @GetMapping("/{orderId}")
