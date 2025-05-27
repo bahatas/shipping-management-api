@@ -4,9 +4,13 @@ import com.shippingmanagementapi.dto.UserDTO;
 import com.shippingmanagementapi.model.User;
 import com.shippingmanagementapi.repository.UserRepository;
 import com.shippingmanagementapi.util.MapperUtil;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -14,16 +18,14 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class UserService {
 
 
     private final UserRepository userRepository;
     private final MapperUtil mapper ;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, MapperUtil mapper) {
-        this.userRepository = userRepository;
-        this.mapper = mapper;
-    }
 
     public List<UserDTO> findAll() {
         List<User> storedUsers = userRepository.findAll();
@@ -49,5 +51,25 @@ public class UserService {
     public User findUserIdByEmail(String email) {
         Optional<User> byEmail = userRepository.findByEmail(email);
         return byEmail.get();
+    }
+
+
+    public UserDTO update(UserDTO userDTO) {
+        Optional<User> byEmail = userRepository.findByEmail(userDTO.getEmail());
+        log.info("Username has been found updating : {}", userDTO.getEmail());
+
+        if(!byEmail.isPresent()){
+            log.warn("Username is not exist for this email {}", userDTO.getEmail());
+            throw new NoSuchElementException("Email is not matching with records");
+        }
+        User storedUser = byEmail.get();
+        storedUser.setPhone(userDTO.getPhone());
+        storedUser.setUpdatedAt(LocalDateTime.now());
+        storedUser.setFullName(userDTO.getFullName());
+        if(!StringUtils.isBlank(userDTO.getPassword()) ){
+            passwordEncoder.encode(userDTO.getPassword());
+        }
+        User updatedUser = userRepository.save(storedUser);
+        return mapper.convert(updatedUser, new UserDTO());
     }
 }
