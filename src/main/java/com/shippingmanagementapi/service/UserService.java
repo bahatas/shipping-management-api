@@ -67,7 +67,8 @@ public class UserService {
         storedUser.setUpdatedAt(LocalDateTime.now());
         storedUser.setFullName(userDTO.getFullName());
         if(!StringUtils.isBlank(userDTO.getPassword()) ){
-            passwordEncoder.encode(userDTO.getPassword());
+           String encodedPassword = passwordEncoder.encode(userDTO.getPassword());
+           storedUser.setPassword(encodedPassword);
         }
         User updatedUser = userRepository.save(storedUser);
         return mapper.convert(updatedUser, new UserDTO());
