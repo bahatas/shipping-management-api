@@ -1,5 +1,6 @@
 package com.shippingmanagementapi.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.shippingmanagementapi.model.User;
 import lombok.Data;
@@ -10,18 +11,24 @@ import java.util.List;
 
 @Data
 public class UserDTO {
+    @JsonIgnoreProperties
     private Long id;
     private String email;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private String passwordHash;
+    private String password;
 
     private String fullName;
     private String phone;
+    private String address1;
+    private String adress2;
+    private String city;
+    private String country;
+    private String postcode;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    // UserDetails'den gelen alanlar
+    // UserDetails
     private boolean accountNonExpired;
     private boolean accountNonLocked;
     private boolean credentialsNonExpired;

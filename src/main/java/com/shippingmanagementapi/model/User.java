@@ -1,7 +1,9 @@
 package com.shippingmanagementapi.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +13,8 @@ import java.util.Collection;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "users")
 public class User implements UserDetails {
@@ -18,18 +22,24 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    @Column(unique = true, nullable = false)
     private String email;
+
+    private Boolean enabled = true;
     
-    @Column(name = "password_hash")
-    private String passwordHash;
+    @Column(nullable = false)
+    private String password;
     
+    private String role;
+
+    //todo @Eray needs to replace with name - surname instead
     @Column(name = "full_name")
     private String fullName;
     
     private String phone;
     
     @Column(name = "created_at")
-    private LocalDateTime createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
     
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
@@ -41,10 +51,10 @@ public class User implements UserDetails {
 
     @Override
     public String getPassword() {
-        return passwordHash;
+        return password;
     }
 
-    @Override
+
     public String getUsername() {
         return email;
     }

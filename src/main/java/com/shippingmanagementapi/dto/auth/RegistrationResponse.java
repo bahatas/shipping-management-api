@@ -1,6 +1,5 @@
 package com.shippingmanagementapi.dto.auth;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,10 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AuthenticationRequest {
+public class RegistrationResponse {
 
-    @NotNull
-    private String email;
-    @NotNull
-    private String password;
+    private String userName;
+    private String message;
 } 
