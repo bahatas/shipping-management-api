@@ -1,0 +1,871 @@
+{
+	"info": {
+		"_postman_id": "745047f9-9216-4676-b052-520f2742899d",
+		"name": "Shipping Management API",
+		"description": "Collection containing all API endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30255852",
+		"_collection_link": "https://ddd444-5311.postman.co/workspace/Team-Workspace~cddd8f28-0039-4077-826f-4332a6a0684d/collection/30255852-745047f9-9216-4676-b052-520f2742899d?action=share&source=collection_link&creator=30255852"
+	},
+	"item": [
+		{
+			"name": "ShipEngine Integration",
+			"item": [
+				{
+					"name": "Get Shipping Rates",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/shipping/rates",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"shipping",
+								"rates"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Track Package",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/shipping/track/SE123456789",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"shipping",
+								"track",
+								"SE123456789"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate Address",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/shipping/validate-address",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"shipping",
+								"validate-address"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product Operations",
+			"item": [
+				{
+					"name": "Search Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/products/search?asin=B07ZPKBL9V",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"search"
+							],
+							"query": [
+								{
+									"key": "asin",
+									"value": "B07ZPKBL9V"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Search Products",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/products/search?asin=B07ZPKBL9V",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"products",
+										"search"
+									],
+									"query": [
+										{
+											"key": "asin",
+											"value": "B07ZPKBL9V"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 19 Apr 2025 13:33:57 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"asin\": \"B07ZPKBL9V\",\n    \"productTitle\": \"Apple iPhone 11, 64GB, (PRODUCT)RED - Fully Unlocked (Renewed)\",\n    \"productPrice\": \"$199.00\",\n    \"productOriginalPrice\": null,\n    \"currency\": \"USD\",\n    \"country\": \"US\",\n    \"productPhoto\": \"https://m.media-amazon.com/images/I/514k7uOBMwL._AC_SL1000_.jpg\",\n    \"productAvailability\": \"Only 3 left in stock - order soon.\",\n    \"productDetails\": {\n        \"brand\": \"Apple\",\n        \"operatingSystem\": \"iOS 16\",\n        \"ramMemory\": \"4 GB\",\n        \"cpuModel\": \"A13\",\n        \"memoryStorage\": \"64 GB\",\n        \"screenSize\": \"6.1 Inches\",\n        \"resolution\": \"1792x828\"\n    },\n    \"productPhotos\": [\n        \"https://m.media-amazon.com/images/I/514k7uOBMwL._AC_SL1000_.jpg\",\n        \"https://m.media-amazon.com/images/I/71fBbZoMdGL._AC_SL1500_.jpg\",\n        \"https://m.media-amazon.com/images/I/61PdhJpC4NL._AC_SL1500_.jpg\",\n        \"https://m.media-amazon.com/images/I/61Ed2L5egWL._AC_SL1500_.jpg\"\n    ],\n    \"productShippingDetails\": {\n        \"asin\": \"B07ZPKBL9V\",\n        \"title\": \"Apple iPhone 11, 64GB, (PRODUCT)RED - Fully Unlocked (Renewed)\",\n        \"price\": 199,\n        \"currency\": \"USD\",\n        \"dimensions\": \"7 x 5 x 4 inches\",\n        \"weight\": 6.7,\n        \"weightUnit\": \"ounces\",\n        \"availability\": \"Only 3 left in stock - order soon.\",\n        \"isPrime\": false,\n        \"manufacturer\": \"Apple Computer\",\n        \"itemModelNumber\": \"iPhone 11\",\n        \"packageDimensions\": null\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Search Products Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/products/search?asin=B0CP7RZRMD",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"search"
+							],
+							"query": [
+								{
+									"key": "asin",
+									"value": "B0CP7RZRMD"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Search Products",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/products/search?asin=B07ZPKBL9V",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"products",
+										"search"
+									],
+									"query": [
+										{
+											"key": "asin",
+											"value": "B07ZPKBL9V"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 19 Apr 2025 13:33:57 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"asin\": \"B07ZPKBL9V\",\n    \"productTitle\": \"Apple iPhone 11, 64GB, (PRODUCT)RED - Fully Unlocked (Renewed)\",\n    \"productPrice\": \"$199.00\",\n    \"productOriginalPrice\": null,\n    \"currency\": \"USD\",\n    \"country\": \"US\",\n    \"productPhoto\": \"https://m.media-amazon.com/images/I/514k7uOBMwL._AC_SL1000_.jpg\",\n    \"productAvailability\": \"Only 3 left in stock - order soon.\",\n    \"productDetails\": {\n        \"brand\": \"Apple\",\n        \"operatingSystem\": \"iOS 16\",\n        \"ramMemory\": \"4 GB\",\n        \"cpuModel\": \"A13\",\n        \"memoryStorage\": \"64 GB\",\n        \"screenSize\": \"6.1 Inches\",\n        \"resolution\": \"1792x828\"\n    },\n    \"productPhotos\": [\n        \"https://m.media-amazon.com/images/I/514k7uOBMwL._AC_SL1000_.jpg\",\n        \"https://m.media-amazon.com/images/I/71fBbZoMdGL._AC_SL1500_.jpg\",\n        \"https://m.media-amazon.com/images/I/61PdhJpC4NL._AC_SL1500_.jpg\",\n        \"https://m.media-amazon.com/images/I/61Ed2L5egWL._AC_SL1500_.jpg\"\n    ],\n    \"productShippingDetails\": {\n        \"asin\": \"B07ZPKBL9V\",\n        \"title\": \"Apple iPhone 11, 64GB, (PRODUCT)RED - Fully Unlocked (Renewed)\",\n        \"price\": 199,\n        \"currency\": \"USD\",\n        \"dimensions\": \"7 x 5 x 4 inches\",\n        \"weight\": 6.7,\n        \"weightUnit\": \"ounces\",\n        \"availability\": \"Only 3 left in stock - order soon.\",\n        \"isPrime\": false,\n        \"manufacturer\": \"Apple Computer\",\n        \"itemModelNumber\": \"iPhone 11\",\n        \"packageDimensions\": null\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Product Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/products/{{productId}}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"{{productId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order Operations",
+			"item": [
+				{
+					"name": "Create Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{url}}/api/orders",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Order Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "username",
+								"value": "baha@test.com",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"storeName\": \"Amazon US\",\n  \"productName\": \"Apple AirPods Pro\",\n  \"asinCode\": \"B09JQMJHXY\",\n  \"country\": \"USA\",\n  \"orderAmount\": 249.99,\n  \"additionalFee\": 15.50,\n  \"shippingAddress\": {\n    \"street\": \"123 Main Street\",\n    \"city\": \"New York\",\n    \"state\": \"NY\",\n    \"zipCode\": \"10001\",\n    \"country\": \"USA\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{url}}/api/orders",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Orders List",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "username",
+								"value": "baha@test.com",
+								"type": "text"
+							},
+							{
+								"key": "username",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/orders",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"orders"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Order Details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/orders/{orderId}",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"orders",
+								"{orderId}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Order Details",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/orders/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"orders",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 18 May 2025 07:19:01 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"orderNumber\": \"ORD-2024-001\",\n    \"storeName\": \"Amazon US\",\n    \"status\": \"pending\",\n    \"productName\": \"Apple AirPods Max\",\n    \"asinCode\": \"B08N5KWB9H\",\n    \"country\": \"USA\",\n    \"orderAmount\": 549.99,\n    \"additionalFee\": 50,\n    \"totalAmount\": 599.99,\n    \"trackingLink\": \"https://track.amazon.com/tracking1\",\n    \"orderDate\": \"2025-03-12T01:31:04\",\n    \"approvedAt\": null\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonData = pm.response.json();",
+									"",
+									"",
+									"pm.collectionVariables.set(\"token\", jsonData.token);",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"email\": \"baha@test.com\",\n   \"password\":\"password\"\n}\n"
+						},
+						"url": {
+							"raw": "{{url}}/api/auth/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"email\": \"user1@test.com\",\n   \"password\":\"password\"\n}\n"
+						},
+						"url": {
+							"raw": "{{url}}/api/auth/register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User opertaion",
+			"item": [
+				{
+					"name": "Get User",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/users/baha@test.com",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"baha@test.com"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/users/baha@test.com",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"baha@test.com"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Disposition",
+									"value": "inline;filename=f.txt"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 17 May 2025 13:59:11 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 3,\n    \"email\": \"baha@test.com\",\n    \"fullName\": \"Baha Test\",\n    \"phone\": null,\n    \"createdAt\": null,\n    \"updatedAt\": null,\n    \"accountNonExpired\": true,\n    \"accountNonLocked\": true,\n    \"credentialsNonExpired\": true,\n    \"enabled\": true,\n    \"authorities\": [\n        {\n            \"authority\": \"ROLE_USER\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Users",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/users/all",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"all"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get User Copy",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/users/all",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"users",
+										"all"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-XSS-Protection",
+									"value": "0"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 17 May 2025 14:01:58 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"email\": \"test@example.com\",\n        \"fullName\": \"Test User\",\n        \"phone\": \"5551234567\",\n        \"createdAt\": \"2025-03-10T22:11:28\",\n        \"updatedAt\": \"2025-03-10T22:11:28\",\n        \"accountNonExpired\": true,\n        \"accountNonLocked\": true,\n        \"credentialsNonExpired\": true,\n        \"enabled\": true,\n        \"authorities\": [\n            {\n                \"authority\": \"ROLE_USER\"\n            }\n        ]\n    },\n    {\n        \"id\": 2,\n        \"email\": \"test@example.com\",\n        \"fullName\": \"Test User\",\n        \"phone\": \"5551234567\",\n        \"createdAt\": \"2025-03-10T22:16:28\",\n        \"updatedAt\": \"2025-03-10T22:16:28\",\n        \"accountNonExpired\": true,\n        \"accountNonLocked\": true,\n        \"credentialsNonExpired\": true,\n        \"enabled\": true,\n        \"authorities\": [\n            {\n                \"authority\": \"ROLE_USER\"\n            }\n        ]\n    },\n    {\n        \"id\": 3,\n        \"email\": \"baha@test.com\",\n        \"fullName\": \"Baha Test\",\n        \"phone\": null,\n        \"createdAt\": null,\n        \"updatedAt\": null,\n        \"accountNonExpired\": true,\n        \"accountNonLocked\": true,\n        \"credentialsNonExpired\": true,\n        \"enabled\": true,\n        \"authorities\": [\n            {\n                \"authority\": \"ROLE_USER\"\n            }\n        ]\n    },\n    {\n        \"id\": 4,\n        \"email\": \"demo@test.com\",\n        \"fullName\": \"Demo User\",\n        \"phone\": null,\n        \"createdAt\": null,\n        \"updatedAt\": null,\n        \"accountNonExpired\": true,\n        \"accountNonLocked\": true,\n        \"credentialsNonExpired\": true,\n        \"enabled\": true,\n        \"authorities\": [\n            {\n                \"authority\": \"ROLE_USER\"\n            }\n        ]\n    },\n    {\n        \"id\": 5,\n        \"email\": \"test@example.com\",\n        \"fullName\": \"Test User\",\n        \"phone\": \"5551234567\",\n        \"createdAt\": \"2025-03-12T01:58:06\",\n        \"updatedAt\": \"2025-03-12T01:58:06\",\n        \"accountNonExpired\": true,\n        \"accountNonLocked\": true,\n        \"credentialsNonExpired\": true,\n        \"enabled\": true,\n        \"authorities\": [\n            {\n                \"authority\": \"ROLE_USER\"\n            }\n        ]\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "UPDATE User",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \n    \"email\": \"baha@test.com\",\n    \"fullName\": \"Baha Test2\",\n    \"phone\": \"07767554433\",\n    \"password\":\"password\",\n    \"createdAt\": null,\n    \"updatedAt\": null,\n    \"accountNonExpired\": true,\n    \"accountNonLocked\": true,\n    \"credentialsNonExpired\": true,\n    \"enabled\": true,\n    \"authorities\": [\n        {\n            \"authority\": \"ROLE_USER\"\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "url",
+			"value": "http://localhost:8081",
+			"type": "string"
+		},
+		{
+			"key": "productId",
+			"value": "1",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "url",
+			"value": "shippingmanagementproject-backend-gpclkj-d04d01-104-248-161-122.traefik.me",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "url",
+			"value": "vendora-api-stag.manchesterai.uk",
+			"type": "string",
+			"disabled": true
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
